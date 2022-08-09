@@ -51,16 +51,17 @@
     <Compile Include="Private\AppDelegate.cs" />
     <Compile Include="Private\GraphicsBuffer.cs" />
     <Compile Include="Private\GraphicsDevice.cs" />
-    <Compile Include="Private\Matrix.cs" />
-    <Compile Include="Private\Vector.cs" />
+    <Compile Include="Private\Mesh.cs" />
+    <Compile Include="Private\Scene.cs" />
+    <Compile Include="Public\Matrix.cs" />
+    <Compile Include="Public\Transform.cs" />
+    <Compile Include="Public\Vector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Public\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1.Private
+namespace ConsoleApp1.Public
 {
     public struct Matrix
     {
