@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace ConsoleApp1.Private
+namespace ConsoleApp1.Public
 {
     public struct Vector
     {
