@@ -25,15 +25,66 @@ namespace ConsoleApp1.Private
         public int[] indexBuffer;
     }
 
-    public class Mesh
+    public abstract class Mesh
     {
-        public RenderData GetRenderData()
-        { 
-            return new RenderData(); 
+        public Mesh(Transform transform)
+        {
+            this.transform = transform;
+            renderData = new RenderData();
+            Init();
         }
 
-        private RenderData renderData;
+        public RenderData GetRenderData()
+        { 
+            return renderData; 
+        }
+
+        abstract public void Init();
+
+        protected RenderData renderData;
 
         public Transform transform;
+    }
+
+    public class CubeMesh : Mesh
+    {
+        public CubeMesh(Transform transform) 
+            : base(transform)
+        {
+
+        }
+
+        public override void Init()
+        {
+            Vector[] vertices =
+            {
+                new Vector(-50,-50,50),
+                new Vector(-50,-50,-50),
+                new Vector(50,-50,-50),
+                new Vector(50,-50,50),
+                new Vector(-50,50,50),
+                new Vector(50,50,50),
+                new Vector(50,50,-50),
+                new Vector(-50,50,-50),
+            };
+
+            int[] indices = 
+            { 
+                1,3,0,1,2,3,
+                0,5,4,0,3,5,
+                7,0,4,7,1,0,
+                2,5,3,2,6,5,
+                7,4,5,7,5,6,
+                1,6,2,1,7,6
+            };
+
+            renderData.vertexBuffer = vertices;
+            renderData.indexBuffer = indices;
+
+            for(int i = 0; i < vertices.Length; i++)
+            {
+                renderData.vertexBuffer[i] = transform.GetMatrixWithScale().Transform(vertices[i]);
+            }
+        }
     }
 }

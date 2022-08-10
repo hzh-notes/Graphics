@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
 using System.Threading;
+using ConsoleApp1.Public;
 
 namespace ConsoleApp1.Private
 {
@@ -66,12 +67,25 @@ namespace ConsoleApp1.Private
             }
         }
 
+        /// <summary>
+        /// 渲染入口
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public void Render(TimeSpan deltaTime)
         {
             var graphics = buffer.BackgroundGraphics;
 
             graphics.Clear(Color.White);
-            graphics.DrawLine(new Point(0, 0), new Point(200, 200), Color.Black);
+            //graphics.DrawLine(new Point(0, 0), new Point(200, 200), Color.Black);
+            graphics.DrawMesh(
+                new CubeMesh(
+                    new Transform(
+                        new Vector(50, 0, 0),
+                        new Vector(0, 0, 60),
+                        new Vector(0.2f, 0.2f, 0.2f)
+                        )
+                    )
+                );
             graphics.DrawString($"FPS: {1000.0 / deltaTime.Milliseconds:F2}",
                 defaultFont, Brushes.Black, 0, 0);
 

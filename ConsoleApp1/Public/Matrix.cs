@@ -48,6 +48,22 @@ namespace ConsoleApp1.Public
             });
         }
 
+        public static Matrix LookAtLH(Vector eye, Vector rotation)
+        {
+            Matrix rotationMat = Matrix.Rotation(rotation);
+
+            Vector lookAt = rotationMat.Transform(Vector.UnitX);
+            Vector right = rotationMat.Transform(Vector.UnitY);
+            Vector up = rotationMat.Transform(Vector.UnitZ);
+
+            return new Matrix(new[] {
+                right.X, up.X, lookAt.X, 0,
+                right.Y, up.Y, lookAt.Y, 0,
+                right.Z, up.Z, lookAt.Z, 0,
+                -eye.Dot(right), -eye.Dot(up), -eye.Dot(lookAt), 1
+            });
+        }
+
         public static bool operator !=(Matrix a, Matrix b)
         {
             return !(a == b);
@@ -84,6 +100,17 @@ namespace ConsoleApp1.Public
                 0, 0, zfar/(zfar - znear), 1,
                 0, 0, znear*zfar/(znear - zfar), 0
             });
+        }
+
+        public static Matrix ReversedZPerspective(float HalfFOV, float Width, float Height, float MinZ, float MaxZ)
+        {
+            return new Matrix(
+                new[]{1.0f / (float)Math.Tan(HalfFOV), 0.0f, 0.0f, 0.0f,
+                    0.0f, Width / (float)Math.Tan(HalfFOV) / Height, 0.0f, 0.0f,
+                    0.0f, 0.0f, ((MinZ == MaxZ) ? 0.0f : MinZ / (MinZ - MaxZ)), 1.0f,
+                    0.0f, 0.0f, ((MinZ == MaxZ) ? MinZ : -MaxZ * MinZ / (MinZ - MaxZ)), 0.0f 
+                });
+
         }
 
         public static Matrix Rotation(Vector r)
