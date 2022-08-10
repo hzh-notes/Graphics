@@ -35,7 +35,6 @@ namespace ConsoleApp1.Private
             //canvasGraphics.Clear(color);
         }
 
-        //
         public void DrawLine(Vector v0, Vector v1, Color color)
         {
             Point p0 = new Point((int)(v0.X * width), (int)(v0.Y * height));
